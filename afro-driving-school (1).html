@@ -1,0 +1,1553 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>AFRO Driving School | Cobham & Kingston</title>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --red: #E8340A;
+      --navy: #0F2047;
+      --gold: #F5A623;
+      --cream: #FAF8F4;
+      --white: #FFFFFF;
+      --light-gray: #F0EDE7;
+      --text: #1A1A2E;
+      --muted: #6B7A8D;
+      --border: #E0DDD7;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--cream);
+      color: var(--text);
+      overflow-x: hidden;
+    }
+
+    /* ========== SCROLL BAR ========== */
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: var(--cream); }
+    ::-webkit-scrollbar-thumb { background: var(--red); border-radius: 3px; }
+
+    /* ========== NAV ========== */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+      background: rgba(255,255,255,0.96);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      padding: 0 5%;
+      display: flex; align-items: center; justify-content: space-between;
+      height: 72px;
+      transition: box-shadow 0.3s;
+    }
+    nav.scrolled { box-shadow: 0 4px 30px rgba(0,0,0,0.08); }
+
+    .nav-logo {
+      display: flex; align-items: center; gap: 12px;
+      text-decoration: none;
+    }
+    .nav-logo-mark {
+      width: 44px; height: 44px;
+      background: var(--red);
+      border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      color: white; font-family: 'Bebas Neue', sans-serif;
+      font-size: 20px; letter-spacing: 1px;
+    }
+    .nav-logo-text { line-height: 1.1; }
+    .nav-logo-text strong {
+      display: block;
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 18px; letter-spacing: 2px; color: var(--navy);
+    }
+    .nav-logo-text span { font-size: 11px; color: var(--muted); letter-spacing: 1px; }
+
+    .nav-links {
+      display: flex; align-items: center; gap: 2px;
+      list-style: none;
+    }
+    .nav-links a {
+      text-decoration: none; color: var(--text);
+      font-size: 14px; font-weight: 500;
+      padding: 8px 14px; border-radius: 8px;
+      transition: all 0.2s;
+    }
+    .nav-links a:hover, .nav-links a.active { background: var(--light-gray); color: var(--red); }
+    .nav-links a.nav-cta {
+      background: var(--red); color: white; margin-left: 8px;
+    }
+    .nav-links a.nav-cta:hover { background: #c42a07; }
+
+    .nav-phone {
+      display: flex; align-items: center; gap: 8px;
+      font-size: 14px; font-weight: 600; color: var(--navy);
+      text-decoration: none;
+    }
+    .nav-phone span {
+      width: 32px; height: 32px; background: var(--navy);
+      border-radius: 50%; display: flex; align-items: center; justify-content: center;
+      color: white; font-size: 14px;
+    }
+
+    .hamburger {
+      display: none;
+      flex-direction: column; gap: 5px; cursor: pointer;
+      padding: 4px;
+    }
+    .hamburger span {
+      width: 24px; height: 2px; background: var(--navy);
+      border-radius: 2px; transition: 0.3s;
+    }
+
+    /* ========== PAGE SECTIONS ========== */
+    .page { display: none; }
+    .page.active { display: block; }
+
+    /* ========== HERO ========== */
+    #hero {
+      min-height: 100vh;
+      padding-top: 72px;
+      position: relative;
+      overflow: hidden;
+      background: var(--navy);
+    }
+
+    .hero-bg {
+      position: absolute; inset: 0;
+      background-image: url('https://images.unsplash.com/photo-1600789837494-e46af5c4de04?w=1600&auto=format&fit=crop&q=80');
+      background-size: cover; background-position: center;
+      opacity: 0.25;
+    }
+    .hero-bg::after {
+      content: '';
+      position: absolute; inset: 0;
+      background: linear-gradient(135deg, var(--navy) 0%, transparent 60%, rgba(232,52,10,0.3) 100%);
+    }
+
+    .hero-content {
+      position: relative; z-index: 2;
+      max-width: 1200px; margin: 0 auto;
+      padding: 80px 5% 60px;
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 60px; align-items: center;
+      min-height: calc(100vh - 72px);
+    }
+
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: rgba(232,52,10,0.15); border: 1px solid rgba(232,52,10,0.4);
+      color: var(--gold); font-size: 13px; font-weight: 600; letter-spacing: 2px;
+      padding: 8px 16px; border-radius: 50px; text-transform: uppercase;
+      margin-bottom: 24px;
+      animation: fadeInUp 0.6s ease forwards;
+    }
+    .hero-badge::before { content: '★'; color: var(--gold); font-size: 12px; }
+
+    .hero-headline {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(56px, 7vw, 96px);
+      line-height: 0.95;
+      color: white;
+      letter-spacing: 2px;
+      animation: fadeInUp 0.6s ease 0.1s both;
+    }
+    .hero-headline em {
+      font-style: normal;
+      -webkit-text-stroke: 2px var(--red);
+      color: transparent;
+      display: block;
+    }
+
+    .hero-sub {
+      font-size: 17px; color: rgba(255,255,255,0.7); line-height: 1.7;
+      margin-top: 20px; max-width: 420px;
+      animation: fadeInUp 0.6s ease 0.2s both;
+    }
+
+    .hero-actions {
+      display: flex; gap: 14px; margin-top: 36px; flex-wrap: wrap;
+      animation: fadeInUp 0.6s ease 0.3s both;
+    }
+    .btn-primary {
+      background: var(--red); color: white;
+      padding: 16px 32px; border-radius: 50px;
+      font-weight: 700; font-size: 15px;
+      text-decoration: none; border: none; cursor: pointer;
+      transition: all 0.25s; display: inline-flex; align-items: center; gap: 8px;
+      letter-spacing: 0.3px;
+    }
+    .btn-primary:hover { background: #c42a07; transform: translateY(-2px); box-shadow: 0 8px 25px rgba(232,52,10,0.4); }
+    .btn-outline {
+      background: transparent; color: white;
+      padding: 15px 32px; border-radius: 50px;
+      font-weight: 600; font-size: 15px;
+      text-decoration: none; border: 2px solid rgba(255,255,255,0.35);
+      cursor: pointer; transition: all 0.25s;
+      display: inline-flex; align-items: center; gap: 8px;
+    }
+    .btn-outline:hover { border-color: white; background: rgba(255,255,255,0.1); }
+
+    .hero-stats {
+      display: flex; gap: 32px; margin-top: 48px;
+      animation: fadeInUp 0.6s ease 0.4s both;
+    }
+    .hero-stat { text-align: center; }
+    .hero-stat-num { font-family: 'Bebas Neue', sans-serif; font-size: 42px; color: var(--gold); line-height: 1; }
+    .hero-stat-label { font-size: 12px; color: rgba(255,255,255,0.5); letter-spacing: 1px; text-transform: uppercase; margin-top: 2px; }
+
+    .hero-right { position: relative; }
+    .hero-card {
+      background: rgba(255,255,255,0.08);
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(255,255,255,0.15);
+      border-radius: 24px;
+      overflow: hidden;
+      animation: fadeInRight 0.8s ease 0.3s both;
+    }
+    .hero-card img {
+      width: 100%; height: 380px;
+      object-fit: cover; display: block;
+    }
+    .hero-card-info {
+      padding: 20px 24px;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .hero-card-info span { color: white; font-size: 14px; font-weight: 500; }
+    .hero-card-badge {
+      background: var(--red); color: white;
+      font-size: 12px; font-weight: 700;
+      padding: 6px 14px; border-radius: 50px;
+    }
+
+    .floating-chip {
+      position: absolute;
+      background: white; border-radius: 16px;
+      padding: 12px 18px; box-shadow: 0 8px 32px rgba(0,0,0,0.2);
+      display: flex; align-items: center; gap: 10px;
+      font-size: 13px; font-weight: 600; color: var(--text);
+      animation: float 3s ease-in-out infinite;
+    }
+    .floating-chip.chip-1 { top: 20px; left: -30px; animation-delay: 0s; }
+    .floating-chip.chip-2 { bottom: 30px; right: -20px; animation-delay: 1.5s; }
+    .chip-icon { font-size: 20px; }
+
+    @keyframes float {
+      0%,100% { transform: translateY(0); }
+      50% { transform: translateY(-8px); }
+    }
+
+    /* ========== TRUST BAR ========== */
+    .trust-bar {
+      background: var(--white); border-bottom: 1px solid var(--border);
+      padding: 20px 5%;
+    }
+    .trust-bar-inner {
+      max-width: 1200px; margin: 0 auto;
+      display: flex; align-items: center; justify-content: space-around;
+      flex-wrap: wrap; gap: 20px;
+    }
+    .trust-item {
+      display: flex; align-items: center; gap: 10px;
+      font-size: 14px; font-weight: 500; color: var(--muted);
+    }
+    .trust-icon { font-size: 22px; }
+
+    /* ========== SECTION HEADERS ========== */
+    .section-tag {
+      display: inline-block;
+      background: rgba(232,52,10,0.1); color: var(--red);
+      font-size: 12px; font-weight: 700; letter-spacing: 2px;
+      text-transform: uppercase; padding: 6px 14px; border-radius: 50px;
+      margin-bottom: 14px;
+    }
+    .section-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(36px, 5vw, 58px);
+      color: var(--navy);
+      line-height: 1;
+      letter-spacing: 1px;
+    }
+    .section-sub {
+      font-size: 17px; color: var(--muted); line-height: 1.7;
+      margin-top: 12px; max-width: 560px;
+    }
+    .section-header { margin-bottom: 52px; }
+
+    /* ========== ABOUT SECTION ========== */
+    #about-section {
+      padding: 100px 5%;
+      background: var(--cream);
+    }
+    .about-grid {
+      max-width: 1200px; margin: 0 auto;
+      display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center;
+    }
+    .about-images {
+      position: relative; height: 520px;
+    }
+    .about-img-main {
+      width: 72%; height: 400px;
+      object-fit: cover; border-radius: 20px;
+      position: absolute; top: 0; left: 0;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.12);
+    }
+    .about-img-small {
+      width: 52%; height: 260px;
+      object-fit: cover; border-radius: 16px;
+      position: absolute; bottom: 0; right: 0;
+      box-shadow: 0 16px 40px rgba(0,0,0,0.12);
+      border: 6px solid var(--cream);
+    }
+    .about-exp-badge {
+      position: absolute; top: 40px; right: 10px; z-index: 3;
+      background: var(--red); color: white; border-radius: 16px;
+      padding: 20px; text-align: center;
+      box-shadow: 0 8px 30px rgba(232,52,10,0.35);
+    }
+    .about-exp-badge strong { display: block; font-family: 'Bebas Neue'; font-size: 44px; line-height: 1; }
+    .about-exp-badge span { font-size: 12px; font-weight: 600; letter-spacing: 1px; opacity: 0.85; }
+
+    .about-text p { font-size: 16px; color: var(--muted); line-height: 1.8; margin-bottom: 16px; }
+    .about-features { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 28px 0; }
+    .about-feature {
+      display: flex; align-items: flex-start; gap: 10px;
+    }
+    .about-feature-icon {
+      width: 36px; height: 36px; min-width: 36px;
+      background: rgba(232,52,10,0.1); border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 16px;
+    }
+    .about-feature-text strong { display: block; font-size: 14px; font-weight: 700; color: var(--navy); }
+    .about-feature-text span { font-size: 13px; color: var(--muted); }
+
+    /* ========== COURSES ========== */
+    #courses-section {
+      padding: 100px 5%;
+      background: var(--navy);
+      position: relative; overflow: hidden;
+    }
+    #courses-section::before {
+      content: '';
+      position: absolute; top: -200px; right: -200px;
+      width: 600px; height: 600px;
+      background: radial-gradient(circle, rgba(232,52,10,0.15) 0%, transparent 70%);
+      border-radius: 50%;
+    }
+    .courses-inner { max-width: 1200px; margin: 0 auto; position: relative; }
+    #courses-section .section-title { color: white; }
+    #courses-section .section-sub { color: rgba(255,255,255,0.55); }
+
+    .courses-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 24px; margin-top: 52px;
+    }
+    .course-card {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 20px; padding: 32px;
+      transition: all 0.3s; cursor: pointer;
+      position: relative; overflow: hidden;
+    }
+    .course-card::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: linear-gradient(135deg, rgba(232,52,10,0.08) 0%, transparent 60%);
+      opacity: 0; transition: opacity 0.3s;
+    }
+    .course-card:hover { border-color: rgba(232,52,10,0.4); transform: translateY(-4px); }
+    .course-card:hover::before { opacity: 1; }
+    .course-card.featured {
+      border-color: var(--red);
+      background: rgba(232,52,10,0.08);
+    }
+    .course-popular {
+      position: absolute; top: 16px; right: 16px;
+      background: var(--gold); color: var(--navy);
+      font-size: 11px; font-weight: 700; letter-spacing: 1px;
+      padding: 4px 10px; border-radius: 50px; text-transform: uppercase;
+    }
+    .course-icon { font-size: 36px; margin-bottom: 20px; }
+    .course-type { font-size: 12px; font-weight: 600; letter-spacing: 2px; color: var(--gold); text-transform: uppercase; margin-bottom: 8px; }
+    .course-name { font-family: 'Bebas Neue'; font-size: 28px; color: white; letter-spacing: 1px; }
+    .course-price { font-family: 'Bebas Neue'; font-size: 56px; color: var(--red); letter-spacing: 1px; line-height: 1; margin: 16px 0 4px; }
+    .course-price span { font-family: 'DM Sans'; font-size: 18px; color: rgba(255,255,255,0.4); }
+    .course-hours {
+      display: inline-flex; align-items: center; gap: 6px;
+      background: rgba(255,255,255,0.08); border-radius: 50px;
+      font-size: 13px; color: rgba(255,255,255,0.6);
+      padding: 6px 14px; margin-bottom: 20px;
+    }
+    .course-features { list-style: none; }
+    .course-features li {
+      display: flex; align-items: center; gap: 8px;
+      font-size: 14px; color: rgba(255,255,255,0.65);
+      padding: 7px 0; border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+    .course-features li::before { content: '✓'; color: var(--gold); font-weight: 700; font-size: 13px; }
+    .course-btn {
+      display: block; width: 100%; margin-top: 24px;
+      padding: 14px; border-radius: 12px; border: none;
+      background: rgba(255,255,255,0.08); color: white;
+      font-weight: 600; font-size: 14px; cursor: pointer;
+      transition: all 0.25s; text-align: center;
+    }
+    .course-btn:hover, .course-card.featured .course-btn { background: var(--red); }
+
+    /* ========== HOW IT WORKS ========== */
+    #howitworks {
+      padding: 100px 5%; background: var(--white);
+    }
+    .how-inner { max-width: 1200px; margin: 0 auto; }
+    .steps-grid {
+      display: grid; grid-template-columns: repeat(4, 1fr);
+      gap: 0; margin-top: 52px; position: relative;
+    }
+    .steps-grid::before {
+      content: '';
+      position: absolute; top: 36px; left: 12.5%; right: 12.5%;
+      height: 2px; background: linear-gradient(90deg, var(--red), var(--gold));
+      z-index: 0;
+    }
+    .step { text-align: center; padding: 0 20px; position: relative; z-index: 1; }
+    .step-num {
+      width: 72px; height: 72px;
+      background: var(--cream); border: 3px solid var(--red);
+      border-radius: 50%; display: flex; align-items: center; justify-content: center;
+      font-family: 'Bebas Neue'; font-size: 30px; color: var(--red);
+      margin: 0 auto 20px;
+    }
+    .step-title { font-weight: 700; font-size: 16px; color: var(--navy); margin-bottom: 8px; }
+    .step-text { font-size: 14px; color: var(--muted); line-height: 1.6; }
+
+    /* ========== REVIEWS ========== */
+    #reviews-section {
+      padding: 100px 5%; background: var(--cream);
+    }
+    .reviews-inner { max-width: 1200px; margin: 0 auto; }
+    .reviews-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 24px;
+    }
+    .review-card {
+      background: white; border-radius: 20px;
+      padding: 28px; border: 1px solid var(--border);
+      transition: box-shadow 0.3s, transform 0.3s;
+    }
+    .review-card:hover { box-shadow: 0 12px 40px rgba(0,0,0,0.08); transform: translateY(-3px); }
+    .review-stars { color: var(--gold); font-size: 16px; margin-bottom: 14px; letter-spacing: 2px; }
+    .review-text { font-size: 15px; color: var(--text); line-height: 1.7; margin-bottom: 20px; font-style: italic; }
+    .review-author { display: flex; align-items: center; gap: 12px; }
+    .review-avatar {
+      width: 44px; height: 44px; border-radius: 50%;
+      object-fit: cover;
+    }
+    .review-name { font-weight: 700; font-size: 14px; color: var(--navy); }
+    .review-date { font-size: 12px; color: var(--muted); }
+
+    /* ========== GALLERY ========== */
+    #gallery-page {
+      padding: 100px 5%; background: var(--cream);
+      min-height: 100vh;
+    }
+    .gallery-inner { max-width: 1200px; margin: 0 auto; }
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      grid-template-rows: auto;
+      gap: 16px; margin-top: 52px;
+    }
+    .gallery-item {
+      border-radius: 16px; overflow: hidden;
+      position: relative; cursor: pointer;
+    }
+    .gallery-item.tall { grid-row: span 2; }
+    .gallery-item.wide { grid-column: span 2; }
+    .gallery-item img {
+      width: 100%; height: 100%; min-height: 220px;
+      object-fit: cover; display: block;
+      transition: transform 0.5s ease;
+    }
+    .gallery-item:hover img { transform: scale(1.05); }
+    .gallery-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(to top, rgba(15,32,71,0.7) 0%, transparent 60%);
+      opacity: 0; transition: opacity 0.3s;
+      display: flex; align-items: flex-end;
+      padding: 20px;
+    }
+    .gallery-item:hover .gallery-overlay { opacity: 1; }
+    .gallery-overlay span { color: white; font-weight: 600; font-size: 15px; }
+
+    /* ========== TIKTOK VIDEOS ========== */
+    #videos-page {
+      padding: 100px 5%; background: var(--cream);
+      min-height: 100vh;
+    }
+    .videos-inner { max-width: 1200px; margin: 0 auto; }
+    .tiktok-hero {
+      background: linear-gradient(135deg, #010101 0%, #1a1a2e 100%);
+      border-radius: 28px; padding: 52px;
+      display: flex; align-items: center; gap: 40px;
+      margin-bottom: 60px; overflow: hidden; position: relative;
+    }
+    .tiktok-hero::before {
+      content: '';
+      position: absolute; top: -60px; right: -60px;
+      width: 300px; height: 300px;
+      background: radial-gradient(circle, rgba(105,201,197,0.15) 0%, transparent 70%);
+      border-radius: 50%;
+    }
+    .tiktok-logo-big { font-size: 80px; filter: drop-shadow(0 0 20px rgba(105,201,197,0.5)); }
+    .tiktok-hero-text h2 {
+      font-family: 'Bebas Neue'; font-size: 52px;
+      color: white; letter-spacing: 2px; line-height: 1;
+    }
+    .tiktok-hero-text h2 span { color: #69C9C5; }
+    .tiktok-hero-text p { color: rgba(255,255,255,0.6); font-size: 16px; margin-top: 12px; line-height: 1.6; max-width: 480px; }
+    .tiktok-follow {
+      display: inline-flex; align-items: center; gap: 10px;
+      background: white; color: #010101;
+      padding: 12px 24px; border-radius: 50px; margin-top: 20px;
+      font-weight: 700; font-size: 14px; text-decoration: none;
+      transition: transform 0.2s;
+    }
+    .tiktok-follow:hover { transform: scale(1.03); }
+
+    .videos-section-title {
+      font-family: 'Bebas Neue'; font-size: 36px;
+      color: var(--navy); letter-spacing: 1px;
+      margin-bottom: 28px;
+    }
+
+    .tiktok-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 28px; margin-bottom: 60px;
+    }
+    .tiktok-embed-container {
+      background: white; border-radius: 20px;
+      overflow: hidden; border: 1px solid var(--border);
+      box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+    .tiktok-embed-container:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 40px rgba(0,0,0,0.12);
+    }
+    .tiktok-embed-container iframe {
+      width: 100%; border: none;
+      display: block;
+    }
+    .tiktok-card-mock {
+      background: #010101; border-radius: 20px;
+      overflow: hidden; aspect-ratio: 9/16;
+      position: relative; cursor: pointer;
+      border: 1px solid rgba(255,255,255,0.1);
+      transition: transform 0.3s;
+    }
+    .tiktok-card-mock:hover { transform: scale(1.02); }
+    .tiktok-card-img {
+      width: 100%; height: 100%; object-fit: cover;
+      opacity: 0.75;
+    }
+    .tiktok-card-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, transparent 50%);
+      display: flex; flex-direction: column;
+      justify-content: space-between; padding: 16px;
+    }
+    .tiktok-card-top {
+      display: flex; justify-content: flex-end;
+    }
+    .tiktok-card-brand {
+      background: rgba(255,255,255,0.15); backdrop-filter: blur(8px);
+      border-radius: 50px; padding: 6px 12px;
+      display: flex; align-items: center; gap: 6px;
+      color: white; font-size: 12px; font-weight: 600;
+    }
+    .tiktok-card-bottom { color: white; }
+    .tiktok-card-title { font-weight: 700; font-size: 14px; margin-bottom: 8px; line-height: 1.4; }
+    .tiktok-card-meta {
+      display: flex; align-items: center; gap: 14px;
+      font-size: 13px; color: rgba(255,255,255,0.7);
+    }
+    .tiktok-card-meta span { display: flex; align-items: center; gap: 4px; }
+    .tiktok-play-btn {
+      position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+      width: 56px; height: 56px; border-radius: 50%;
+      background: rgba(255,255,255,0.2); backdrop-filter: blur(8px);
+      border: 2px solid rgba(255,255,255,0.5);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 20px; transition: background 0.2s;
+    }
+    .tiktok-card-mock:hover .tiktok-play-btn { background: rgba(105,201,197,0.4); border-color: #69C9C5; }
+
+    /* ========== BOOKING ========== */
+    #booking-section {
+      padding: 100px 5%;
+      background: var(--white);
+    }
+    .booking-inner { max-width: 1200px; margin: 0 auto; }
+    .booking-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: start;
+    }
+    .booking-info h3 { font-family: 'Bebas Neue'; font-size: 28px; color: var(--navy); letter-spacing: 1px; margin-bottom: 6px; }
+    .booking-info p { font-size: 15px; color: var(--muted); line-height: 1.7; margin-bottom: 24px; }
+    .contact-item {
+      display: flex; align-items: center; gap: 14px;
+      padding: 16px 0; border-bottom: 1px solid var(--border);
+    }
+    .contact-icon {
+      width: 44px; height: 44px; border-radius: 12px;
+      background: rgba(232,52,10,0.1);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 18px; min-width: 44px;
+    }
+    .contact-label { font-size: 12px; color: var(--muted); font-weight: 500; text-transform: uppercase; letter-spacing: 1px; }
+    .contact-val { font-size: 16px; font-weight: 600; color: var(--navy); }
+
+    .booking-form-card {
+      background: var(--navy); border-radius: 24px;
+      padding: 40px; color: white;
+    }
+    .booking-form-card h3 {
+      font-family: 'Bebas Neue'; font-size: 32px;
+      letter-spacing: 1px; margin-bottom: 6px;
+    }
+    .booking-form-card p { font-size: 14px; color: rgba(255,255,255,0.5); margin-bottom: 28px; }
+    .form-group { margin-bottom: 18px; }
+    .form-group label { display: block; font-size: 13px; font-weight: 600; margin-bottom: 7px; color: rgba(255,255,255,0.7); letter-spacing: 0.5px; }
+    .form-group input, .form-group select, .form-group textarea {
+      width: 100%; padding: 13px 16px;
+      background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 12px; color: white; font-size: 14px;
+      font-family: 'DM Sans', sans-serif;
+      transition: border-color 0.2s;
+      outline: none;
+    }
+    .form-group input:focus, .form-group select:focus { border-color: var(--red); }
+    .form-group select option { background: var(--navy); }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .form-submit {
+      width: 100%; padding: 16px;
+      background: var(--red); color: white; border: none;
+      border-radius: 12px; font-weight: 700; font-size: 16px;
+      cursor: pointer; margin-top: 8px;
+      transition: background 0.2s, transform 0.2s;
+    }
+    .form-submit:hover { background: #c42a07; transform: translateY(-1px); }
+
+    /* ========== FOOTER ========== */
+    footer {
+      background: var(--navy); padding: 60px 5% 30px;
+    }
+    .footer-inner { max-width: 1200px; margin: 0 auto; }
+    .footer-grid {
+      display: grid; grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 40px; padding-bottom: 48px;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
+    .footer-brand { }
+    .footer-logo {
+      display: flex; align-items: center; gap: 12px; margin-bottom: 16px;
+    }
+    .footer-logo-mark {
+      width: 44px; height: 44px; background: var(--red);
+      border-radius: 10px; display: flex; align-items: center; justify-content: center;
+      font-family: 'Bebas Neue'; font-size: 20px; letter-spacing: 1px; color: white;
+    }
+    .footer-logo-text strong { display: block; color: white; font-family: 'Bebas Neue'; font-size: 18px; letter-spacing: 2px; }
+    .footer-logo-text span { font-size: 11px; color: rgba(255,255,255,0.4); letter-spacing: 1px; }
+    .footer-brand p { font-size: 14px; color: rgba(255,255,255,0.45); line-height: 1.7; margin-bottom: 20px; }
+    .footer-social { display: flex; gap: 10px; }
+    .social-btn {
+      width: 38px; height: 38px; border-radius: 10px;
+      background: rgba(255,255,255,0.08);
+      display: flex; align-items: center; justify-content: center;
+      color: rgba(255,255,255,0.6); font-size: 15px; cursor: pointer;
+      transition: all 0.2s; text-decoration: none;
+    }
+    .social-btn:hover { background: var(--red); color: white; }
+    .footer-col h4 { font-size: 13px; font-weight: 700; color: white; letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 18px; }
+    .footer-col ul { list-style: none; }
+    .footer-col ul li { margin-bottom: 10px; }
+    .footer-col ul li a {
+      color: rgba(255,255,255,0.45); font-size: 14px;
+      text-decoration: none; transition: color 0.2s;
+    }
+    .footer-col ul li a:hover { color: white; }
+    .footer-bottom {
+      padding-top: 24px; display: flex;
+      justify-content: space-between; align-items: center;
+      flex-wrap: wrap; gap: 12px;
+    }
+    .footer-bottom p { font-size: 13px; color: rgba(255,255,255,0.3); }
+    .footer-bottom a { color: rgba(255,255,255,0.3); text-decoration: none; }
+
+    /* ========== ANIMATIONS ========== */
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes fadeInRight {
+      from { opacity: 0; transform: translateX(40px); }
+      to { opacity: 1; transform: translateX(0); }
+    }
+
+    /* ========== MOBILE NAV ========== */
+    @media (max-width: 900px) {
+      .nav-links { display: none; }
+      .nav-phone { display: none; }
+      .hamburger { display: flex; }
+      .mobile-menu {
+        position: fixed; inset: 0; top: 72px;
+        background: rgba(255,255,255,0.97);
+        backdrop-filter: blur(20px);
+        z-index: 999; flex-direction: column;
+        align-items: center; justify-content: center;
+        gap: 8px; display: none;
+      }
+      .mobile-menu.open { display: flex; }
+      .mobile-menu a {
+        font-size: 24px; font-family: 'Bebas Neue';
+        letter-spacing: 3px; color: var(--navy);
+        text-decoration: none; padding: 10px 24px;
+        border-radius: 12px; transition: background 0.2s;
+      }
+      .mobile-menu a:hover { background: var(--light-gray); color: var(--red); }
+      .hero-content { grid-template-columns: 1fr; gap: 40px; padding: 40px 5%; }
+      .hero-right { display: none; }
+      .about-grid { grid-template-columns: 1fr; }
+      .about-images { height: 300px; display: none; }
+      .booking-grid { grid-template-columns: 1fr; }
+      .steps-grid { grid-template-columns: 1fr 1fr; }
+      .steps-grid::before { display: none; }
+      .tiktok-grid { grid-template-columns: 1fr; }
+      .gallery-grid { grid-template-columns: 1fr 1fr; }
+      .gallery-item.tall { grid-row: span 1; }
+      .gallery-item.wide { grid-column: span 1; }
+      .footer-grid { grid-template-columns: 1fr 1fr; }
+      .tiktok-hero { flex-direction: column; text-align: center; padding: 32px; }
+      .tiktok-logo-big { font-size: 56px; }
+    }
+
+    @media (max-width: 580px) {
+      .hero-stats { flex-wrap: wrap; justify-content: center; }
+      .gallery-grid { grid-template-columns: 1fr; }
+      .steps-grid { grid-template-columns: 1fr; }
+      .form-row { grid-template-columns: 1fr; }
+      .footer-grid { grid-template-columns: 1fr; }
+      .about-features { grid-template-columns: 1fr; }
+    }
+
+    /* ========== COURSE DETAIL MODAL ========== */
+    .modal-bg {
+      display: none; position: fixed; inset: 0;
+      background: rgba(10,10,20,0.7); backdrop-filter: blur(6px);
+      z-index: 2000; align-items: center; justify-content: center;
+    }
+    .modal-bg.open { display: flex; }
+    .modal {
+      background: white; border-radius: 24px;
+      padding: 40px; max-width: 480px; width: 90%;
+      position: relative; animation: fadeInUp 0.3s ease;
+    }
+    .modal-close {
+      position: absolute; top: 16px; right: 16px;
+      background: var(--light-gray); border: none; cursor: pointer;
+      width: 32px; height: 32px; border-radius: 8px; font-size: 16px;
+    }
+
+    /* Active nav highlight */
+    .nav-links a.page-active { color: var(--red); background: rgba(232,52,10,0.08); }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="mainNav">
+  <a class="nav-logo" href="#" onclick="showPage('home')">
+    <div class="nav-logo-mark">ADS</div>
+    <div class="nav-logo-text">
+      <strong>AFRO DRIVING</strong>
+      <span>COBHAM & KINGSTON</span>
+    </div>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#" onclick="showPage('home')" id="nav-home" class="page-active">Home</a></li>
+    <li><a href="#" onclick="scrollToSection('about-section')" id="nav-about">About</a></li>
+    <li><a href="#" onclick="scrollToSection('courses-section')" id="nav-courses">Courses</a></li>
+    <li><a href="#" onclick="showPage('gallery')" id="nav-gallery">Gallery</a></li>
+    <li><a href="#" onclick="showPage('videos')" id="nav-videos">📱 TikTok</a></li>
+    <li><a href="#" onclick="scrollToSection('reviews-section')" id="nav-reviews">Reviews</a></li>
+    <li><a href="#" onclick="scrollToSection('booking-section')" class="nav-cta">Book a Lesson</a></li>
+  </ul>
+  <a href="tel:07960352884" class="nav-phone" style="display:flex">
+    <span>📞</span> 07960 352884
+  </a>
+  <div class="hamburger" onclick="toggleMobile()" id="hamburger">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#" onclick="showPage('home');toggleMobile()">Home</a>
+  <a href="#" onclick="showPage('home');scrollToSection('about-section');toggleMobile()">About</a>
+  <a href="#" onclick="showPage('home');scrollToSection('courses-section');toggleMobile()">Courses</a>
+  <a href="#" onclick="showPage('gallery');toggleMobile()">Gallery</a>
+  <a href="#" onclick="showPage('videos');toggleMobile()">📱 TikTok Videos</a>
+  <a href="#" onclick="showPage('home');scrollToSection('reviews-section');toggleMobile()">Reviews</a>
+  <a href="#" onclick="showPage('home');scrollToSection('booking-section');toggleMobile()" style="color:var(--red)">Book a Lesson</a>
+  <a href="tel:07960352884" style="font-size:18px;color:var(--muted)">📞 07960 352884</a>
+</div>
+
+<!-- ============================= HOME PAGE ============================= -->
+<div class="page active" id="home">
+
+  <!-- HERO -->
+  <section id="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-content">
+      <div class="hero-left">
+        <div class="hero-badge">⭐ 5-Star Rated Instructor</div>
+        <h1 class="hero-headline">
+          LEARN TO<br>
+          <em>DRIVE</em><br>
+          WITH CONFIDENCE
+        </h1>
+        <p class="hero-sub">Professional driving lessons in Cobham & Kingston. Manual & Automatic. Flexible schedules to fit your life.</p>
+        <div class="hero-actions">
+          <a href="#" class="btn-primary" onclick="scrollToSection('booking-section')">🚗 Book a Lesson</a>
+          <a href="tel:07960352884" class="btn-outline">📞 Call Us Today</a>
+        </div>
+        <div class="hero-stats">
+          <div class="hero-stat">
+            <div class="hero-stat-num">98%</div>
+            <div class="hero-stat-label">Pass Rate</div>
+          </div>
+          <div class="hero-stat">
+            <div class="hero-stat-num">500+</div>
+            <div class="hero-stat-label">Students</div>
+          </div>
+          <div class="hero-stat">
+            <div class="hero-stat-num">5★</div>
+            <div class="hero-stat-label">Reviews</div>
+          </div>
+        </div>
+      </div>
+      <div class="hero-right">
+        <div class="floating-chip chip-1">
+          <span class="chip-icon">🎉</span>
+          <div><strong>First Time Pass!</strong><br><small style="color:#888">Just now — Kingston</small></div>
+        </div>
+        <div class="hero-card">
+          <img src="https://images.unsplash.com/photo-1580273916550-e323be2ae537?w=600&auto=format&fit=crop&q=80" alt="Student learning to drive"/>
+          <div class="hero-card-info">
+            <span>👨‍🏫 Expert Instruction • 1-on-1</span>
+            <span class="hero-card-badge">DVSA Approved</span>
+          </div>
+        </div>
+        <div class="floating-chip chip-2">
+          <span class="chip-icon">📍</span>
+          <div><strong>Cobham & Kingston</strong><br><small style="color:#888">We come to you</small></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TRUST BAR -->
+  <div class="trust-bar">
+    <div class="trust-bar-inner">
+      <div class="trust-item"><span class="trust-icon">🛡️</span> DVSA Approved Instructor</div>
+      <div class="trust-item"><span class="trust-icon">🚗</span> Manual & Automatic Cars</div>
+      <div class="trust-item"><span class="trust-icon">📅</span> 7 Days a Week</div>
+      <div class="trust-item"><span class="trust-icon">📍</span> Pickup from Home/Work</div>
+      <div class="trust-item"><span class="trust-icon">💳</span> Flexible Payment Plans</div>
+    </div>
+  </div>
+
+  <!-- ABOUT -->
+  <section id="about-section">
+    <div class="about-grid">
+      <div class="about-images">
+        <img class="about-img-main" src="https://images.unsplash.com/photo-1560472354-b33ff0c44a43?w=700&auto=format&fit=crop&q=80" alt="Instructor and student"/>
+        <img class="about-img-small" src="https://images.unsplash.com/photo-1558981806-ec527fa84c39?w=500&auto=format&fit=crop&q=80" alt="Student driving"/>
+        <div class="about-exp-badge">
+          <strong>10+</strong>
+          <span>YEARS<br>EXPERIENCE</span>
+        </div>
+      </div>
+      <div class="about-text">
+        <div class="section-tag">About Us</div>
+        <h2 class="section-title">YOUR ROAD TO<br>FREEDOM STARTS<br>HERE</h2>
+        <p>AFRO Driving School is a hidden gem in Cobham & Kingston, committed to helping people harness the power of the open road. Our highly-praised lead instructor Charles combines professionalism with a warm, personable teaching style.</p>
+        <p>Every student is unique — Charles takes the time to understand your goals, strengths, and learning style before crafting a lesson plan built around <em>you</em>.</p>
+        <div class="about-features">
+          <div class="about-feature">
+            <div class="about-feature-icon">🎯</div>
+            <div class="about-feature-text">
+              <strong>Tailored Lessons</strong>
+              <span>Personalised to your learning pace</span>
+            </div>
+          </div>
+          <div class="about-feature">
+            <div class="about-feature-icon">🚗</div>
+            <div class="about-feature-text">
+              <strong>Comfort Vehicles</strong>
+              <span>Modern, dual-control cars</span>
+            </div>
+          </div>
+          <div class="about-feature">
+            <div class="about-feature-icon">📜</div>
+            <div class="about-feature-text">
+              <strong>Licensed Training</strong>
+              <span>Fully DVSA registered</span>
+            </div>
+          </div>
+          <div class="about-feature">
+            <div class="about-feature-icon">📅</div>
+            <div class="about-feature-text">
+              <strong>Flexible Schedule</strong>
+              <span>Evenings & weekends available</span>
+            </div>
+          </div>
+        </div>
+        <a href="#" class="btn-primary" onclick="scrollToSection('booking-section')">Start Your Journey →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- COURSES -->
+  <section id="courses-section">
+    <div class="courses-inner">
+      <div class="section-header">
+        <div class="section-tag">Our Courses</div>
+        <h2 class="section-title" style="color:white">CHOOSE YOUR<br>LEARNING PATH</h2>
+        <p class="section-sub">Structured lessons designed for all weather conditions and road types — from residential streets to busy dual carriageways.</p>
+      </div>
+      <div class="courses-grid">
+        <!-- Card 1 -->
+        <div class="course-card">
+          <div class="course-icon">🚗</div>
+          <div class="course-type">Manual</div>
+          <div class="course-name">Single Lesson</div>
+          <div class="course-price">£80<span> /2hrs</span></div>
+          <div class="course-hours">⏱ 2 Hours</div>
+          <ul class="course-features">
+            <li>One-to-one tuition</li>
+            <li>Pick up & drop off</li>
+            <li>Progress feedback</li>
+          </ul>
+          <button class="course-btn" onclick="scrollToSection('booking-section')">Book Now</button>
+        </div>
+        <!-- Card 2 -->
+        <div class="course-card featured">
+          <div class="course-popular">Most Popular</div>
+          <div class="course-icon">🏆</div>
+          <div class="course-type">Manual</div>
+          <div class="course-name">10-Hour Package</div>
+          <div class="course-price">£350<span> /10hrs</span></div>
+          <div class="course-hours">⏱ 10 Hours</div>
+          <ul class="course-features">
+            <li>Save £50 vs single lessons</li>
+            <li>Full test preparation</li>
+            <li>All road types covered</li>
+            <li>Hazard perception training</li>
+          </ul>
+          <button class="course-btn" onclick="scrollToSection('booking-section')">Book Now</button>
+        </div>
+        <!-- Card 3 -->
+        <div class="course-card">
+          <div class="course-icon">⚡</div>
+          <div class="course-type">Automatic</div>
+          <div class="course-name">Single Lesson</div>
+          <div class="course-price">£45<span> /hr</span></div>
+          <div class="course-hours">⏱ 1 Hour</div>
+          <ul class="course-features">
+            <li>Beginner friendly</li>
+            <li>Modern automatic car</li>
+            <li>Patient instruction</li>
+          </ul>
+          <button class="course-btn" onclick="scrollToSection('booking-section')">Book Now</button>
+        </div>
+        <!-- Card 4 -->
+        <div class="course-card">
+          <div class="course-icon">🎯</div>
+          <div class="course-type">Automatic</div>
+          <div class="course-name">10-Hour Package</div>
+          <div class="course-price">£370<span> /10hrs</span></div>
+          <div class="course-hours">⏱ 10 Hours</div>
+          <ul class="course-features">
+            <li>Best value for automatics</li>
+            <li>Test-ready training</li>
+            <li>Theory support included</li>
+            <li>Dual-control car</li>
+          </ul>
+          <button class="course-btn" onclick="scrollToSection('booking-section')">Book Now</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- HOW IT WORKS -->
+  <section id="howitworks">
+    <div class="how-inner">
+      <div class="section-header" style="text-align:center">
+        <div class="section-tag">Process</div>
+        <h2 class="section-title">HOW IT WORKS</h2>
+        <p class="section-sub" style="margin: 12px auto 0">Getting started is simple. From booking to passing your test, we guide you every step of the way.</p>
+      </div>
+      <div class="steps-grid">
+        <div class="step">
+          <div class="step-num">01</div>
+          <div class="step-title">Get in Touch</div>
+          <p class="step-text">Call us, WhatsApp, or fill in the booking form. We'll discuss your needs and find the right course.</p>
+        </div>
+        <div class="step">
+          <div class="step-num">02</div>
+          <div class="step-title">Book Your Lesson</div>
+          <p class="step-text">Choose a day and time that suits you — evenings, weekends, and early mornings all available.</p>
+        </div>
+        <div class="step">
+          <div class="step-num">03</div>
+          <div class="step-title">Learn & Progress</div>
+          <p class="step-text">Charles comes to you. Each lesson is tailored to your pace, building confidence on real roads.</p>
+        </div>
+        <div class="step">
+          <div class="step-num">04</div>
+          <div class="step-title">Pass Your Test</div>
+          <p class="step-text">When you're ready, take your test confidently. Our students have an excellent first-time pass rate!</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- REVIEWS -->
+  <section id="reviews-section">
+    <div class="reviews-inner">
+      <div class="section-header">
+        <div class="section-tag">Testimonials</div>
+        <h2 class="section-title">WHAT OUR<br>STUDENTS SAY</h2>
+        <p class="section-sub">Don't take our word for it — hear from the hundreds of students who passed with AFRO Driving School.</p>
+      </div>
+      <div class="reviews-grid">
+        <div class="review-card">
+          <div class="review-stars">★★★★★</div>
+          <p class="review-text">"Charles made every minute of my lessons memorable and enjoyable. Every instruction was on point — I highly recommend AFRO Driving School to anyone wanting to pass first time!"</p>
+          <div class="review-author">
+            <img class="review-avatar" src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&auto=format&fit=crop&q=80" alt="Prince James"/>
+            <div>
+              <div class="review-name">Prince James</div>
+              <div class="review-date">December 2025 · Kingston</div>
+            </div>
+          </div>
+        </div>
+        <div class="review-card">
+          <div class="review-stars">★★★★★</div>
+          <p class="review-text">"Passed first attempt! Charles is a great instructor and kind-hearted person. He helped me secure my UK driver's licence. You make driving feel like you're travelling with a friend!"</p>
+          <div class="review-author">
+            <img class="review-avatar" src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=100&auto=format&fit=crop&q=80" alt="Marcus T"/>
+            <div>
+              <div class="review-name">Marcus T.</div>
+              <div class="review-date">November 2025 · Cobham</div>
+            </div>
+          </div>
+        </div>
+        <div class="review-card">
+          <div class="review-stars">★★★★★</div>
+          <p class="review-text">"As I looked out the window after passing I was a bit sad — Charles and I wouldn't have our great conversations anymore! His outstanding teaching destined me to pass. Couldn't ask for better."</p>
+          <div class="review-author">
+            <img class="review-avatar" src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100&auto=format&fit=crop&q=80" alt="Alexander M"/>
+            <div>
+              <div class="review-name">Alexander M.</div>
+              <div class="review-date">November 2025 · Kingston</div>
+            </div>
+          </div>
+        </div>
+        <div class="review-card">
+          <div class="review-stars">★★★★★</div>
+          <p class="review-text">"Charles combines professionalism with a genuinely friendly teaching style. Clear guidance, helpful tips, always punctual, and focused on safety. Grateful for his support in helping me pass!"</p>
+          <div class="review-author">
+            <img class="review-avatar" src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=100&auto=format&fit=crop&q=80" alt="Sophie K"/>
+            <div>
+              <div class="review-name">Sophie K.</div>
+              <div class="review-date">November 2025 · Cobham</div>
+            </div>
+          </div>
+        </div>
+        <div class="review-card">
+          <div class="review-stars">★★★★★</div>
+          <p class="review-text">"I was nervous about learning to drive as an adult but Charles made me feel completely at ease. Patient, clear, and encouraging at every step. I passed within 3 months of starting!"</p>
+          <div class="review-author">
+            <img class="review-avatar" src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=100&auto=format&fit=crop&q=80" alt="Emma R"/>
+            <div>
+              <div class="review-name">Emma R.</div>
+              <div class="review-date">October 2025 · Kingston</div>
+            </div>
+          </div>
+        </div>
+        <div class="review-card">
+          <div class="review-stars">★★★★★</div>
+          <p class="review-text">"Switched from another school after slow progress. Within weeks with Charles I could see huge improvements. His feedback after every lesson is genuinely helpful. First time pass — absolutely brilliant!"</p>
+          <div class="review-author">
+            <img class="review-avatar" src="https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=100&auto=format&fit=crop&q=80" alt="James W"/>
+            <div>
+              <div class="review-name">James W.</div>
+              <div class="review-date">October 2025 · Cobham</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- BOOKING -->
+  <section id="booking-section">
+    <div class="booking-inner">
+      <div class="booking-grid">
+        <div class="booking-info">
+          <div class="section-tag">Get In Touch</div>
+          <h2 class="section-title">READY TO START<br>YOUR JOURNEY?</h2>
+          <p>Book your first lesson today or get in touch to discuss which course is right for you. We're available 7 days a week.</p>
+          <div class="contact-item">
+            <div class="contact-icon">📞</div>
+            <div>
+              <div class="contact-label">Phone / WhatsApp</div>
+              <div class="contact-val"><a href="tel:07960352884" style="color:var(--navy);text-decoration:none">07960 352884</a></div>
+            </div>
+          </div>
+          <div class="contact-item">
+            <div class="contact-icon">📧</div>
+            <div>
+              <div class="contact-label">Email</div>
+              <div class="contact-val"><a href="mailto:fcdaniel_s@yahoo.co.uk" style="color:var(--navy);text-decoration:none">fcdaniel_s@yahoo.co.uk</a></div>
+            </div>
+          </div>
+          <div class="contact-item">
+            <div class="contact-icon">📍</div>
+            <div>
+              <div class="contact-label">Areas Covered</div>
+              <div class="contact-val">Cobham, Kingston & Surrounding Areas</div>
+            </div>
+          </div>
+          <div class="contact-item">
+            <div class="contact-icon">🕐</div>
+            <div>
+              <div class="contact-label">Available Hours</div>
+              <div class="contact-val">Monday – Sunday, 7am – 8pm</div>
+            </div>
+          </div>
+          <div style="margin-top:24px">
+            <a href="https://wa.me/+447960352884" class="btn-primary" style="text-decoration:none">💬 WhatsApp Us Now</a>
+          </div>
+        </div>
+        <div class="booking-form-card">
+          <h3>Book a Lesson</h3>
+          <p>Fill in the form and Charles will be in touch within 24 hours.</p>
+          <div class="form-row">
+            <div class="form-group">
+              <label>First Name</label>
+              <input type="text" placeholder="Your first name"/>
+            </div>
+            <div class="form-group">
+              <label>Last Name</label>
+              <input type="text" placeholder="Your last name"/>
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Phone Number</label>
+            <input type="tel" placeholder="07xxx xxx xxx"/>
+          </div>
+          <div class="form-group">
+            <label>Email Address</label>
+            <input type="email" placeholder="your@email.com"/>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label>Lesson Type</label>
+              <select>
+                <option value="">Choose type</option>
+                <option>Manual Driving</option>
+                <option>Automatic Driving</option>
+                <option>Refresher Lesson</option>
+                <option>Intensive Course</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Experience Level</label>
+              <select>
+                <option value="">Your level</option>
+                <option>Complete Beginner</option>
+                <option>Some Experience</option>
+                <option>Test Ready</option>
+                <option>Refresher</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Preferred Start Date</label>
+            <input type="date"/>
+          </div>
+          <button class="form-submit" onclick="submitForm()">🚗 Book My Lesson</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</div><!-- /home page -->
+
+<!-- ============================= GALLERY PAGE ============================= -->
+<div class="page" id="gallery-page-wrapper" style="padding-top:72px; min-height:100vh;">
+  <section id="gallery-page">
+    <div class="gallery-inner">
+      <div class="section-header">
+        <div class="section-tag">Gallery</div>
+        <h2 class="section-title">LIFE ON THE ROAD<br>WITH AFRO DRIVING</h2>
+        <p class="section-sub">Moments from lessons, celebrations, and happy students who've earned their freedom on UK roads.</p>
+      </div>
+      <div class="gallery-grid">
+        <div class="gallery-item tall">
+          <img src="https://images.unsplash.com/photo-1449965408869-eaa3f722e40d?w=600&auto=format&fit=crop&q=80" alt="Driving lesson"/>
+          <div class="gallery-overlay"><span>Out on the roads →</span></div>
+        </div>
+        <div class="gallery-item">
+          <img src="https://images.unsplash.com/photo-1580273916550-e323be2ae537?w=500&auto=format&fit=crop&q=80" alt="Student in car"/>
+          <div class="gallery-overlay"><span>Learning the controls</span></div>
+        </div>
+        <div class="gallery-item">
+          <img src="https://images.unsplash.com/photo-1606664515524-ed2f786a0bd6?w=500&auto=format&fit=crop&q=80" alt="Pass certificate"/>
+          <div class="gallery-overlay"><span>Test passed! 🎉</span></div>
+        </div>
+        <div class="gallery-item wide">
+          <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&auto=format&fit=crop&q=80" alt="Driving in Kingston"/>
+          <div class="gallery-overlay"><span>Kingston roads</span></div>
+        </div>
+        <div class="gallery-item">
+          <img src="https://images.unsplash.com/photo-1601362840469-51e4d8d58785?w=500&auto=format&fit=crop&q=80" alt="Happy student"/>
+          <div class="gallery-overlay"><span>Another pass! ⭐</span></div>
+        </div>
+        <div class="gallery-item">
+          <img src="https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?w=500&auto=format&fit=crop&q=80" alt="Car on road"/>
+          <div class="gallery-overlay"><span>Surrey roads</span></div>
+        </div>
+        <div class="gallery-item">
+          <img src="https://images.unsplash.com/photo-1502161254066-6c74afbf07aa?w=500&auto=format&fit=crop&q=80" alt="Roundabout practice"/>
+          <div class="gallery-overlay"><span>Roundabout practice</span></div>
+        </div>
+        <div class="gallery-item tall">
+          <img src="https://images.unsplash.com/photo-1617469767053-d3b523a0b982?w=500&auto=format&fit=crop&q=80" alt="Learner driver"/>
+          <div class="gallery-overlay"><span>Building confidence</span></div>
+        </div>
+        <div class="gallery-item">
+          <img src="https://images.unsplash.com/photo-1494976388531-d1058494cdd8?w=500&auto=format&fit=crop&q=80" alt="Car keys"/>
+          <div class="gallery-overlay"><span>Keys to freedom 🔑</span></div>
+        </div>
+      </div>
+      <div style="text-align:center; margin-top:52px">
+        <a href="#" class="btn-primary" onclick="showPage('home');scrollToSection('booking-section')">🚗 Book Your Lesson Today</a>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ============================= VIDEOS PAGE ============================= -->
+<div class="page" id="videos-page-wrapper" style="padding-top:72px; min-height:100vh;">
+  <section id="videos-page">
+    <div class="videos-inner">
+      <!-- TikTok Hero Banner -->
+      <div class="tiktok-hero">
+        <div class="tiktok-logo-big">
+          <svg width="80" height="80" viewBox="0 0 50 50" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M34.1 5.5C34.1 5.5 34.5 12.7 41.5 13.3V20.3C41.5 20.3 37.3 20.5 34.1 18.1V31.9C34.1 39.4 26.2 45.2 18.8 42.1C11.4 39 9.8 29.5 15.9 24.4C20.3 20.6 26.5 21.1 26.5 21.1V28.4C26.5 28.4 23.4 27.7 21.2 29.6C19 31.5 19.2 35.3 21.7 36.9C24.2 38.5 28 37.4 29 34.3C29.3 33.4 29.4 32.4 29.4 31.4V5.5H34.1Z" fill="white"/>
+            <path d="M34.1 5.5C34.1 5.5 34.5 12.7 41.5 13.3V20.3C41.5 20.3 37.3 20.5 34.1 18.1V31.9C34.1 39.4 26.2 45.2 18.8 42.1C11.4 39 9.8 29.5 15.9 24.4C20.3 20.6 26.5 21.1 26.5 21.1V28.4C26.5 28.4 23.4 27.7 21.2 29.6C19 31.5 19.2 35.3 21.7 36.9C24.2 38.5 28 37.4 29 34.3C29.3 33.4 29.4 32.4 29.4 31.4V5.5H34.1Z" fill="#69C9C5" opacity="0.5"/>
+          </svg>
+        </div>
+        <div class="tiktok-hero-text">
+          <h2>WATCH US ON <span>TIKTOK</span></h2>
+          <p>Driving tips, student wins, road safety advice, and behind-the-scenes content — all on our TikTok. Follow us to stay updated and learn before you even get in the car!</p>
+          <a href="https://www.tiktok.com/@afrodrivingschool" target="_blank" class="tiktok-follow">
+            <svg width="20" height="20" viewBox="0 0 50 50" fill="none"><path d="M34.1 5.5C34.1 5.5 34.5 12.7 41.5 13.3V20.3C41.5 20.3 37.3 20.5 34.1 18.1V31.9C34.1 39.4 26.2 45.2 18.8 42.1C11.4 39 9.8 29.5 15.9 24.4C20.3 20.6 26.5 21.1 26.5 21.1V28.4C26.5 28.4 23.4 27.7 21.2 29.6C19 31.5 19.2 35.3 21.7 36.9C24.2 38.5 28 37.4 29 34.3C29.3 33.4 29.4 32.4 29.4 31.4V5.5H34.1Z" fill="#010101"/></svg>
+            Follow @afrodrivingschool
+          </a>
+        </div>
+      </div>
+
+      <!-- Video cards -->
+      <div class="videos-section-title">🎬 LATEST VIDEOS</div>
+      <div class="tiktok-grid">
+        <!-- Video 1 -->
+        <div class="tiktok-card-mock">
+          <img class="tiktok-card-img" src="https://images.unsplash.com/photo-1568605117036-5fe5e7bab0b7?w=400&auto=format&fit=crop&q=80" alt="TikTok video"/>
+          <div class="tiktok-card-overlay">
+            <div class="tiktok-card-top">
+              <div class="tiktok-card-brand">
+                <svg width="14" height="14" viewBox="0 0 50 50" fill="none"><path d="M34.1 5.5C34.1 5.5 34.5 12.7 41.5 13.3V20.3C41.5 20.3 37.3 20.5 34.1 18.1V31.9C34.1 39.4 26.2 45.2 18.8 42.1C11.4 39 9.8 29.5 15.9 24.4C20.3 20.6 26.5 21.1 26.5 21.1V28.4C26.5 28.4 23.4 27.7 21.2 29.6C19 31.5 19.2 35.3 21.7 36.9C24.2 38.5 28 37.4 29 34.3C29.3 33.4 29.4 32.4 29.4 31.4V5.5H34.1Z" fill="white"/></svg>
+                @afrodrivingschool
+              </div>
+            </div>
+            <div class="tiktok-play-btn">▶</div>
+            <div class="tiktok-card-bottom">
+              <div class="tiktok-card-title">Top 5 mistakes learner drivers make at roundabouts 🚦</div>
+              <div class="tiktok-card-meta">
+                <span>❤️ 2.4k</span>
+                <span>💬 87</span>
+                <span>↗️ 312</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Video 2 -->
+        <div class="tiktok-card-mock">
+          <img class="tiktok-card-img" src="https://images.unsplash.com/photo-1541789094913-f3809a8f3ba5?w=400&auto=format&fit=crop&q=80" alt="TikTok video"/>
+          <div class="tiktok-card-overlay">
+            <div class="tiktok-card-top">
+              <div class="tiktok-card-brand">
+                <svg width="14" height="14" viewBox="0 0 50 50" fill="none"><path d="M34.1 5.5C34.1 5.5 34.5 12.7 41.5 13.3V20.3C41.5 20.3 37.3 20.5 34.1 18.1V31.9C34.1 39.4 26.2 45.2 18.8 42.1C11.4 39 9.8 29.5 15.9 24.4C20.3 20.6 26.5 21.1 26.5 21.1V28.4C26.5 28.4 23.4 27.7 21.2 29.6C19 31.5 19.2 35.3 21.7 36.9C24.2 38.5 28 37.4 29 34.3C29.3 33.4 29.4 32.4 29.4 31.4V5.5H34.1Z" fill="white"/></svg>
+                @afrodrivingschool
+              </div>
+            </div>
+            <div class="tiktok-play-btn">▶</div>
+            <div class="tiktok-card-bottom">
+              <div class="tiktok-card-title">Student passes first time! 🎉 Her reaction is everything 😭</div>
+              <div class="tiktok-card-meta">
+                <span>❤️ 5.1k</span>
+                <span>💬 204</span>
+                <span>↗️ 891</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Video 3 -->
+        <div class="tiktok-card-mock">
+          <img class="tiktok-card-img" src="https://images.unsplash.com/photo-1617469767053-d3b523a0b982?w=400&auto=format&fit=crop&q=80" alt="TikTok video"/>
+          <div class="tiktok-card-overlay">
+            <div class="tiktok-card-top">
+              <div class="tiktok-card-brand">
+                <svg width="14" height="14" viewBox="0 0 50 50" fill="none"><path d="M34.1 5.5C34.1 5.5 34.5 12.7 41.5 13.3V20.3C41.5 20.3 37.3 20.5 34.1 18.1V31.9C34.1 39.4 26.2 45.2 18.8 42.1C11.4 39 9.8 29.5 15.9 24.4C20.3 20.6 26.5 21.1 26.5 21.1V28.4C26.5 28.4 23.4 27.7 21.2 29.6C19 31.5 19.2 35.3 21.7 36.9C24.2 38.5 28 37.4 29 34.3C29.3 33.4 29.4 32.4 29.4 31.4V5.5H34.1Z" fill="white"/></svg>
+                @afrodrivingschool
+              </div>
+            </div>
+            <div class="tiktok-play-btn">▶</div>
+            <div class="tiktok-card-bottom">
+              <div class="tiktok-card-title">How to do a perfect parallel park every time 🅿️ #drivingtips</div>
+              <div class="tiktok-card-meta">
+                <span>❤️ 8.7k</span>
+                <span>💬 316</span>
+                <span>↗️ 1.2k</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Video 4 -->
+        <div class="tiktok-card-mock">
+          <img class="tiktok-card-img" src="https://images.unsplash.com/photo-1449965408869-eaa3f722e40d?w=400&auto=format&fit=crop&q=80" alt="TikTok video"/>
+          <div class="tiktok-card-overlay">
+            <div class="tiktok-card-top">
+              <div class="tiktok-card-brand">
+                <svg width="14" height="14" viewBox="0 0 50 50" fill="none"><path d="M34.1 5.5C34.1 5.5 34.5 12.7 41.5 13.3V20.3C41.5 20.3 37.3 20.5 34.1 18.1V31.9C34.1 39.4 26.2 45.2 18.8 42.1C11.4 39 9.8 29.5 15.9 24.4C20.3 20.6 26.5 21.1 26.5 21.1V28.4C26.5 28.4 23.4 27.7 21.2 29.6C19 31.5 19.2 35.3 21.7 36.9C24.2 38.5 28 37.4 29 34.3C29.3 33.4 29.4 32.4 29.4 31.4V5.5H34.1Z" fill="white"/></svg>
+                @afrodrivingschool
+              </div>
+            </div>
+            <div class="tiktok-play-btn">▶</div>
+            <div class="tiktok-card-bottom">
+              <div class="tiktok-card-title">A day out on Kingston roads with a nervous beginner 🛣️</div>
+              <div class="tiktok-card-meta">
+                <span>❤️ 3.2k</span>
+                <span>💬 142</span>
+                <span>↗️ 423</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Video 5 -->
+        <div class="tiktok-card-mock">
+          <img class="tiktok-card-img" src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&auto=format&fit=crop&q=80" alt="TikTok video"/>
+          <div class="tiktok-card-overlay">
+            <div class="tiktok-card-top">
+              <div class="tiktok-card-brand">
+                <svg width="14" height="14" viewBox="0 0 50 50" fill="none"><path d="M34.1 5.5C34.1 5.5 34.5 12.7 41.5 13.3V20.3C41.5 20.3 37.3 20.5 34.1 18.1V31.9C34.1 39.4 26.2 45.2 18.8 42.1C11.4 39 9.8 29.5 15.9 24.4C20.3 20.6 26.5 21.1 26.5 21.1V28.4C26.5 28.4 23.4 27.7 21.2 29.6C19 31.5 19.2 35.3 21.7 36.9C24.2 38.5 28 37.4 29 34.3C29.3 33.4 29.4 32.4 29.4 31.4V5.5H34.1Z" fill="white"/></svg>
+                @afrodrivingschool
+              </div>
+            </div>
+            <div class="tiktok-play-btn">▶</div>
+            <div class="tiktok-card-bottom">
+              <div class="tiktok-card-title">Manual vs Automatic — which should YOU learn? ⚡🚗</div>
+              <div class="tiktok-card-meta">
+                <span>❤️ 11k</span>
+                <span>💬 507</span>
+                <span>↗️ 2.1k</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Video 6 -->
+        <div class="tiktok-card-mock">
+          <img class="tiktok-card-img" src="https://images.unsplash.com/photo-1580273916550-e323be2ae537?w=400&auto=format&fit=crop&q=80" alt="TikTok video"/>
+          <div class="tiktok-card-overlay">
+            <div class="tiktok-card-top">
+              <div class="tiktok-card-brand">
+                <svg width="14" height="14" viewBox="0 0 50 50" fill="none"><path d="M34.1 5.5C34.1 5.5 34.5 12.7 41.5 13.3V20.3C41.5 20.3 37.3 20.5 34.1 18.1V31.9C34.1 39.4 26.2 45.2 18.8 42.1C11.4 39 9.8 29.5 15.9 24.4C20.3 20.6 26.5 21.1 26.5 21.1V28.4C26.5 28.4 23.4 27.7 21.2 29.6C19 31.5 19.2 35.3 21.7 36.9C24.2 38.5 28 37.4 29 34.3C29.3 33.4 29.4 32.4 29.4 31.4V5.5H34.1Z" fill="white"/></svg>
+                @afrodrivingschool
+              </div>
+            </div>
+            <div class="tiktok-play-btn">▶</div>
+            <div class="tiktok-card-bottom">
+              <div class="tiktok-card-title">The MSPSL routine explained in under 60 seconds ⏱️ #learner</div>
+              <div class="tiktok-card-meta">
+                <span>❤️ 6.8k</span>
+                <span>💬 231</span>
+                <span>↗️ 945</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Embed info box -->
+      <div style="background: linear-gradient(135deg,#f0f7ff,#e8f3ff); border-radius:20px; padding:32px; border:1px solid #d0e4f7; margin-bottom:40px;">
+        <h3 style="font-family:'Bebas Neue';font-size:28px;color:var(--navy);letter-spacing:1px;margin-bottom:10px;">📲 SEE US LIVE ON TIKTOK</h3>
+        <p style="color:var(--muted);font-size:15px;line-height:1.7;margin-bottom:18px;">Want to watch our actual TikTok videos right here? Follow us <strong>@afrodrivingschool</strong> on TikTok and drop the link to your favourite video — we'll embed it directly on this page for everyone to enjoy!</p>
+        <a href="https://www.tiktok.com/@afrodrivingschool" target="_blank" class="btn-primary" style="text-decoration:none">Open TikTok Profile →</a>
+      </div>
+
+    </div>
+  </section>
+</div>
+
+<!-- ============================= FOOTER (shared) ============================= -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="footer-logo">
+          <div class="footer-logo-mark">ADS</div>
+          <div class="footer-logo-text">
+            <strong>AFRO DRIVING SCHOOL</strong>
+            <span>COBHAM & KINGSTON, ENGLAND</span>
+          </div>
+        </div>
+        <p>A hidden gem committed to helping people harness the power of the open road. Personalised, patient, and professional driving tuition in Surrey.</p>
+        <div class="footer-social">
+          <a class="social-btn" href="https://wa.me/+447960352884" title="WhatsApp">💬</a>
+          <a class="social-btn" href="https://www.tiktok.com/@afrodrivingschool" title="TikTok" target="_blank">
+            <svg width="15" height="15" viewBox="0 0 50 50" fill="none"><path d="M34.1 5.5C34.1 5.5 34.5 12.7 41.5 13.3V20.3C41.5 20.3 37.3 20.5 34.1 18.1V31.9C34.1 39.4 26.2 45.2 18.8 42.1C11.4 39 9.8 29.5 15.9 24.4C20.3 20.6 26.5 21.1 26.5 21.1V28.4C26.5 28.4 23.4 27.7 21.2 29.6C19 31.5 19.2 35.3 21.7 36.9C24.2 38.5 28 37.4 29 34.3C29.3 33.4 29.4 32.4 29.4 31.4V5.5H34.1Z" fill="currentColor"/></svg>
+          </a>
+          <a class="social-btn" href="mailto:fcdaniel_s@yahoo.co.uk" title="Email">✉️</a>
+          <a class="social-btn" href="tel:07960352884" title="Call">📞</a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Quick Links</h4>
+        <ul>
+          <li><a href="#" onclick="showPage('home')">Home</a></li>
+          <li><a href="#" onclick="showPage('home');scrollToSection('about-section')">About Us</a></li>
+          <li><a href="#" onclick="showPage('home');scrollToSection('courses-section')">Courses</a></li>
+          <li><a href="#" onclick="showPage('gallery')">Gallery</a></li>
+          <li><a href="#" onclick="showPage('videos')">TikTok Videos</a></li>
+          <li><a href="#" onclick="showPage('home');scrollToSection('reviews-section')">Reviews</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Our Courses</h4>
+        <ul>
+          <li><a href="#">Manual Driving Lessons</a></li>
+          <li><a href="#">Automatic Driving Lessons</a></li>
+          <li><a href="#">10-Hour Packages</a></li>
+          <li><a href="#">Refresher Courses</a></li>
+          <li><a href="#">Intensive Courses</a></li>
+          <li><a href="#">Pass Plus</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Contact</h4>
+        <ul>
+          <li><a href="tel:07960352884">📞 07960 352884</a></li>
+          <li><a href="mailto:fcdaniel_s@yahoo.co.uk">✉️ Email Us</a></li>
+          <li><a href="https://wa.me/+447960352884">💬 WhatsApp</a></li>
+          <li><a href="#">📍 Cobham, Surrey</a></li>
+          <li><a href="#">📍 Kingston Upon Thames</a></li>
+          <li><a href="#">🕐 Mon–Sun, 7am–8pm</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2025 AFRO Driving School. All rights reserved. | <a href="#">Terms & Conditions</a></p>
+      <p style="color:rgba(255,255,255,0.2)">Designed with ❤️ for safer roads</p>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // ========== PAGE ROUTING ==========
+  const pages = {
+    home: document.getElementById('home'),
+    gallery: document.getElementById('gallery-page-wrapper'),
+    videos: document.getElementById('videos-page-wrapper')
+  };
+
+  function showPage(name) {
+    Object.values(pages).forEach(p => p.classList.remove('active'));
+    if (pages[name]) {
+      pages[name].classList.add('active');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+    // Update nav
+    document.querySelectorAll('.nav-links a').forEach(a => a.classList.remove('page-active'));
+    if (name === 'gallery') document.getElementById('nav-gallery').classList.add('page-active');
+    if (name === 'videos') document.getElementById('nav-videos').classList.add('page-active');
+    if (name === 'home') document.getElementById('nav-home').classList.add('page-active');
+  }
+
+  function scrollToSection(id) {
+    showPage('home');
+    setTimeout(() => {
+      const el = document.getElementById(id);
+      if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }, 100);
+  }
+
+  // ========== NAV SCROLL ==========
+  window.addEventListener('scroll', () => {
+    document.getElementById('mainNav').classList.toggle('scrolled', window.scrollY > 30);
+  });
+
+  // ========== MOBILE MENU ==========
+  function toggleMobile() {
+    document.getElementById('mobileMenu').classList.toggle('open');
+  }
+
+  // ========== FORM ==========
+  function submitForm() {
+    alert('🎉 Thank you! Charles will be in touch within 24 hours to confirm your booking. You can also WhatsApp directly: 07960 352884');
+  }
+
+  // ========== INTERSECTION OBSERVER for subtle reveal ==========
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.style.opacity = '1';
+        e.target.style.transform = 'translateY(0)';
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.course-card, .review-card, .step, .gallery-item, .tiktok-card-mock').forEach(el => {
+    el.style.opacity = '0';
+    el.style.transform = 'translateY(20px)';
+    el.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+    observer.observe(el);
+  });
+</script>
+</body>
+</html>
